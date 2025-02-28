@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3Dオセロゲーム</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #1a1a1a;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        #game-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        #game-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        #ui-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 10;
+        }
+        #score-container {
+            display: flex;
+            justify-content: space-between;
+            width: 200px;
+        }
+        .score {
+            text-align: center;
+        }
+        .current-player {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        #message {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        #reset-button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        #reset-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+<script defer src="bundle.js"></script></head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+        <div id="ui-container">
+            <div id="score-container">
+                <div id="black-score" class="score">
+                    <div>黒</div>
+                    <div>2</div>
+                </div>
+                <div id="white-score" class="score">
+                    <div>白</div>
+                    <div>2</div>
+                </div>
+            </div>
+            <div id="message">あなたの番です</div>
+            <button id="reset-button">ゲームをリセット</button>
+        </div>
+    </div>
+</body>
+</html>
