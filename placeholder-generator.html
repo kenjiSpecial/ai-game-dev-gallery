@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ゲーム画像プレースホルダー生成</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .instructions {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .placeholder {
+            position: relative;
+            height: 200px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+        .placeholder::after {
+            content: "右クリックして画像を保存";
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        .filename {
+            text-align: center;
+            margin-top: 8px;
+            font-weight: bold;
+        }
+        .btn-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .btn {
+            background-color: #3B82F6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #2563EB;
+        }
+    </style>
+</head>
+<body>
+    <h1>ゲーム画像プレースホルダー生成</h1>
+
+    <div class="instructions">
+        <h2>使用方法:</h2>
+        <ol>
+            <li>下記の各画像を右クリックして「名前を付けて画像を保存」を選択</li>
+            <li>ファイル名を「game1.jpg」、「game2.jpg」などに変更して保存</li>
+            <li>保存先を「images」フォルダに指定</li>
+            <li>すべての画像を保存したら、メインのindex.htmlを開いてギャラリーを確認</li>
+        </ol>
+    </div>
+
+    <div class="grid">
+        <div>
+            <div class="placeholder" style="background: linear-gradient(135deg, #4F46E5, #7C3AED);">
+                ファンタジーRPG
+            </div>
+            <div class="filename">game1.jpg</div>
+        </div>
+
+        <div>
+            <div class="placeholder" style="background: linear-gradient(135deg, #F59E0B, #D97706);">
+                サイバーパンク2099
+            </div>
+            <div class="filename">game2.jpg</div>
+        </div>
+
+        <div>
+            <div class="placeholder" style="background: linear-gradient(135deg, #8B5CF6, #6D28D9);">
+                スペースコロニー
+            </div>
+            <div class="filename">game3.jpg</div>
+        </div>
+
+        <div>
+            <div class="placeholder" style="background: linear-gradient(135deg, #6366F1, #4338CA);">
+                ミステリーマンション
+            </div>
+            <div class="filename">game4.jpg</div>
+        </div>
+
+        <div>
+            <div class="placeholder" style="background: linear-gradient(135deg, #EF4444, #B91C1C);">
+                ドラゴンスレイヤー
+            </div>
+            <div class="filename">game5.jpg</div>
+        </div>
+
+        <div>
+            <div class="placeholder" style="background: linear-gradient(135deg, #3B82F6, #1D4ED8);">
+                スピードレーサーGT
+            </div>
+            <div class="filename">game6.jpg</div>
+        </div>
+
+        <div>
+            <div class="placeholder" style="background: linear-gradient(135deg, #EC4899, #BE185D);">
+                クリスタルパズル
+            </div>
+            <div class="filename">game7.jpg</div>
+        </div>
+
+        <div>
+            <div class="placeholder" style="background: linear-gradient(135deg, #10B981, #047857);">
+                エンパイアビルダー
+            </div>
+            <div class="filename">game8.jpg</div>
+        </div>
+    </div>
+
+    <div class="btn-container">
+        <button class="btn" id="downloadAll">すべての画像を一括ダウンロード</button>
+    </div>
+
+    <script>
+        // 画像を一括ダウンロードする機能
+        document.getElementById('downloadAll').addEventListener('click', async () => {
+            const placeholders = document.querySelectorAll('.placeholder');
+
+            for (let i = 0; i < placeholders.length; i++) {
+                const placeholder = placeholders[i];
+                const gameTitle = placeholder.textContent.trim();
+                const filename = `game${i+1}.jpg`;
+
+                // プレースホルダーをキャンバスに描画
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = 800;
+                canvas.height = 600;
+
+                // 背景のグラデーションを取得
+                const style = window.getComputedStyle(placeholder);
+                const background = style.background;
+
+                // キャンバスにグラデーションを描画
+                const gradient = ctx.createLinearGradient(0, 0, 800, 600);
+
+                // 色を抽出（簡易的な方法）
+                let colors = background.match(/rgb\([^)]+\)/g);
+                if (!colors) {
+                    colors = ['rgb(59, 130, 246)', 'rgb(29, 78, 216)'];
+                }
+
+                gradient.addColorStop(0, colors[0]);
+                gradient.addColorStop(1, colors[1] || colors[0]);
+
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, 800, 600);
+
+                // テキストを描画
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 48px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+                ctx.shadowBlur = 10;
+                ctx.shadowOffsetX = 2;
+                ctx.shadowOffsetY = 2;
+                ctx.fillText(gameTitle, 400, 300);
+
+                // 画像をダウンロード
+                const link = document.createElement('a');
+                link.download = filename;
+                link.href = canvas.toDataURL('image/jpeg', 0.9);
+                link.click();
+
+                // 少し待機して連続ダウンロードによるブラウザの制限を回避
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+
+            alert('すべての画像がダウンロードされました。「images」フォルダに保存してください。');
+        });
+
+        // 個別の画像をクリックしてダウンロードする機能
+        document.querySelectorAll('.placeholder').forEach((placeholder, index) => {
+            placeholder.addEventListener('click', () => {
+                const gameTitle = placeholder.textContent.trim();
+                const filename = `game${index+1}.jpg`;
+
+                // プレースホルダーをキャンバスに描画
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = 800;
+                canvas.height = 600;
+
+                // 背景のグラデーションを取得
+                const style = window.getComputedStyle(placeholder);
+                const background = style.background;
+
+                // キャンバスにグラデーションを描画
+                const gradient = ctx.createLinearGradient(0, 0, 800, 600);
+
+                // 色を抽出（簡易的な方法）
+                let colors = background.match(/rgb\([^)]+\)/g);
+                if (!colors) {
+                    colors = ['rgb(59, 130, 246)', 'rgb(29, 78, 216)'];
+                }
+
+                gradient.addColorStop(0, colors[0]);
+                gradient.addColorStop(1, colors[1] || colors[0]);
+
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, 800, 600);
+
+                // テキストを描画
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 48px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+                ctx.shadowBlur = 10;
+                ctx.shadowOffsetX = 2;
+                ctx.shadowOffsetY = 2;
+                ctx.fillText(gameTitle, 400, 300);
+
+                // 画像をダウンロード
+                const link = document.createElement('a');
+                link.download = filename;
+                link.href = canvas.toDataURL('image/jpeg', 0.9);
+                link.click();
+            });
+        });
+    </script>
+</body>
+</html>

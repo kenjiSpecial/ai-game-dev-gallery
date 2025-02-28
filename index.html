@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ゲームギャラリー</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        dark: '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- ヘッダー -->
+    <header class="bg-dark text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <h1 class="text-4xl font-bold text-center">ゲームギャラリー</h1>
+            <p class="text-center mt-2 text-gray-300">最新のゲームコレクション</p>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- ゲームカードグリッド -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- ゲームカード1 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div class="relative">
+                    <a href="games/tetris/index.html" class="block">
+                        <img src="images/tetris.jpg" alt="テトリス" class="w-full h-48 object-cover bg-cyan-600 cursor-pointer" onerror="this.onerror=null; this.classList.add('bg-cyan-600'); this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%25\' height=\'100%25\'%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'24\' fill=\'white\'%3Eテトリス%3C/text%3E%3C/svg%3E';">
+                    </a>
+                    <div class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded">パズル</div>
+                </div>
+                <div class="p-4">
+                    <h2 class="text-xl font-bold text-gray-800 mb-2">テトリス</h2>
+                    <p class="text-gray-600 text-sm mb-4">落ちてくるブロックを操作して横一列を揃えて消していく定番パズルゲーム。シンプルながら奥深い戦略性が魅力。</p>
+                </div>
+            </div>
+
+
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h2 class="text-2xl font-bold">ゲームギャラリー</h2>
+                    <p class="text-gray-400 mt-2">最高のゲーム体験をあなたに</p>
+                </div>
+
+            </div>
+            <hr class="border-gray-700 my-6">
+            <p class="text-center text-gray-400">© 2025 ゲームギャラリー. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
